@@ -1,0 +1,13 @@
+﻿@page
+@model RP.Pages.Applications.DeleteModel
+@{
+    ViewData["Title"] = "Withdraw The Application";
+}
+<h1>@ViewData["Title"]</h1>
+
+
+<form method="post">
+    <p>Are you sure you want to withdraw your application?</p>
+    <button class="Btn" type="submit">Delete</button>
+    <a asp-page="./Index">Cancel</a>
+</form>

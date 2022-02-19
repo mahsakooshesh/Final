@@ -1,0 +1,91 @@
+﻿@page
+@model RP.Pages.Companies.IndexModel
+@{
+    ViewData["Title"] = "Company Page";
+    string companyName = "";
+
+    //check if the logged in user has create profile, if not only the button create profile will be shown
+    if (Model.Company.Count() > 0)
+    {
+        companyName = Model.Company[0].Name;
+    }
+
+    else
+    {
+        companyName = "";
+    }
+    
+}
+
+<h1 id="CompanyH1">@ViewData["Title"]</h1>
+
+<form method="post" asp-page="Create">
+    @if (companyName == "")
+    {
+        <button class="Btn" type="submit" name="btnCreate" runat="server" style="display:block">Create Company Profile</button>
+    }
+    else
+    {
+        <button class="Btn" type="submit" name="btnCreate" runat="server" style="display:none">Create Company Profile</button>
+
+    }
+
+
+</form>
+
+<form id="companyForm" class="Form" method="post" asp-page="../Jobs/Create">
+    @if (companyName != "")
+    {
+        <button id="BtnCreate" class="Btn" type="submit" name="btnCreate" runat="server" style="display:block">Create Job</button>
+
+    }
+</form>
+
+<form id="companyForm2"  class="Form" method="post" asp-page="../Jobs/CreateRandomJobs">
+    @if (companyName != "")
+    {
+        <button id="BtnCreate" class="Btn" type="submit" name="btnCreate" runat="server" style="display:block">Create Random Jobs</button>
+
+    }
+</form>
+
+<div class="Table3">
+    <table>
+        <tbody>
+            @foreach (var item in Model.Company)
+            {
+<tr class="companyInfo">
+    <td id="companyName">
+        <label>Name: </label>
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Name)
+    </td>
+</tr>
+                <tr class="companyInfo">
+                    <td id="companyLocation">
+                        <label>Location: </label>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Location)
+                    </td>
+                </tr>
+
+
+                                <tr class="jobButtonRow">
+                                    <td id="jobButtonEdit">
+                                        <a asp-page="./Edit" class="jobButton" asp-route-id="@item.ID">Edit Profile</a>
+                                    </td>
+                                </tr>
+
+                                                <tr class="jobButtonRow">
+                                                    <td id="jobButtonMyJobs">
+                                                        <a asp-page="../Jobs/Index" class="jobButton" asp-route-id="@item.ID">My Jobs</a>
+                                                    </td>
+                                                </tr>}
+        </tbody>
+    </table>
+</div>
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }

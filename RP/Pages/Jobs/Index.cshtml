@@ -1,0 +1,66 @@
+﻿@page
+@model RP.Pages.Jobs.IndexModel
+@{
+    ViewData["Title"] = "Job Page";
+}
+ <h1 class="H1" id="jobpage">@ViewData["Title"]</h1>
+
+ <form class="Form" id="formJob" method="get">
+     <table>
+         <tbody>
+             <tr>
+                 <th><label for="SearchTerm">Search</label></th>
+                 <td><input type="search" name="SearchTerm" id="SearchTerm" value="@Model.SearchTerm"></td>
+             </tr>
+              <tr>
+                 <th><label for="SortColumn">Sort by</label></th>
+                 <td>
+                     <select asp-for="SortColumn" asp-items="Model.SortColumnList">
+                         <option></option>
+                     </select>
+                 </td>
+             </tr>
+         </tbody>
+     </table>
+     <button class="Btn" type="submit">Search</button>
+ </form>
+ <table class="Table2">
+     <thead>
+         <tr>
+             <th>@Html.DisplayNameFor(m => m.Jobs[0].Position)</th>
+             <th>@Html.DisplayNameFor(m => m.Jobs[0].Department)</th>
+             <th>@Html.DisplayNameFor(m => m.Jobs[0].JobLocation)</th>
+             <th>@Html.DisplayNameFor(m => m.Jobs[0].Salary)</th>
+             <th>@Html.DisplayNameFor(m => m.Jobs[0].ContractTerm)</th>
+             <th></th>
+         </tr>
+     </thead>
+     <tbody>
+         @foreach (var item in Model.Jobs)
+         {
+         <tr>
+             <td>
+                 @Html.DisplayFor(modelItem => item.Position)
+             </td>
+             <td>
+                 @Html.DisplayFor(modelItem => item.Department)
+             </td>
+             <td>
+                 @Html.DisplayFor(modelItem => item.JobLocation)
+             </td>
+             <td>
+                 @Html.DisplayFor(modelItem => item.Salary)
+             </td>
+             <td>
+                 @Html.DisplayFor(modelItem => item.ContractTerm)
+             </td>
+             <td>
+                 <a class="Btn2" asp-page="./Details" asp-route-id="@item.ID">Applicants</a>|
+                 <a class="Btn2" asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
+                 <a class="Btn2" asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+
+             </td>
+         </tr>
+         }
+     </tbody>
+ </table>

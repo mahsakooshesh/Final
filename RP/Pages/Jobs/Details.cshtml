@@ -1,0 +1,68 @@
+﻿@page 
+@model RP.Pages.Jobs.DetailsModel
+@{
+    ViewData["Title"] = "Job Details";
+   
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<form class="Form" method="get">
+    <table>
+        <tbody>
+            <tr>
+                <th><label for="SearchTerm">Search</label></th>
+                <td><input type="search" name="SearchTerm" id="SearchTerm" value="@Model.SearchTerm"></td>
+            </tr>
+            <tr>
+                <th><label for="SortColumn">Sort by</label></th>
+                <td>
+                    <select id="SortColumn" asp-for="SortColumn" asp-items="Model.SortColumnList">
+                        <option></option>
+                    </select>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <button class="Btn" type="submit">Search</button>
+</form>
+<table class="Table3">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(m => m.Applications[0].Applicant.ID)</th>
+            <th>@Html.DisplayNameFor(m => m.Applications[0].Applicant.Education)</th>
+            <th>@Html.DisplayNameFor(m => m.Applications[0].Applicant.ExperienceLevel)</th>
+            <th>@Html.DisplayNameFor(m => m.Applications[0].Applicant.SalaryExpectation)</th>
+            <th>@Html.DisplayNameFor(m => m.Applications[0].Applicant.AssessmentScore)</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Applications)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Applicant.ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Applicant.Education)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Applicant.ExperienceLevel)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Applicant.SalaryExpectation)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Applicant.AssessmentScore)
+                </td>
+                <td>
+                    <form asp-page="post">
+                        <button class="Btn" type="submit" asp-route-id="@item.ID">Send Message</button>
+                    </form>
+                    
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

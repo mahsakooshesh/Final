@@ -1,0 +1,48 @@
+﻿@page
+@model RP.Pages.Jobs.EditModel
+@{
+    ViewData["Title"] = "Edit Job";
+}
+
+
+<div class="H1div">
+    <h1 id="H1">@ViewData["Title"]</h1></div>
+    <form class="Table" method="post">
+        <div id="divEdit" asp-validation-summary="ModelOnly"></div>
+        <input type="hidden" asp-for="FormJob.UserID">
+        <table>
+            <tbody>
+                <tr>
+                    <th><label>Position</label> </th>
+                    <td><input asp-for="FormJob.Position"></td>
+                    <td><span asp-validation-for="FormJob.Position"></span></td>
+                </tr>
+                <tr>
+                    <th><label>Department</label> </th>
+                    <td><input asp-for="FormJob.Department"></td>
+                    <td><span asp-validation-for="FormJob.Department"></span></td>
+                </tr>
+                <tr>
+                    <th><label>Job Location</label> </th>
+                    <td><input asp-for="FormJob.JobLocation"></td>
+                    <td><span asp-validation-for="FormJob.JobLocation"></span></td>
+                </tr>
+                <tr>
+                    <th><label>Salary (SEK)</label> </th>
+                    <td><input asp-for="FormJob.Salary"></td>
+                    <td><span asp-validation-for="FormJob.Salary"></span></td>
+                </tr>
+                <tr>
+                    <th><label>Contract Term</label> </th>
+                    <td><input asp-for="FormJob.ContractTerm"></td>
+                    <td><span asp-validation-for="FormJob.ContractTerm"></span></td>
+                </tr>
+
+            </tbody>
+        </table>
+        <button class="Btn" type="submit">Save Job</button>
+    </form>
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }

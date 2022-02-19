@@ -1,0 +1,62 @@
+﻿@page
+@model RP.Pages.Applications.DetailsModel
+@{
+    ViewData["Title"] = "Apply";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<table class="Table">
+
+    <tbody>
+        @foreach (var item in Model.Job)
+        {
+            <tr>
+                <td>
+                    <label>Position: </label>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Position)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Department: </label>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Department)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Job Location: </label>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.JobLocation)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Salary: </label>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Salary)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Contract Term: </label>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ContractTerm)
+                </td>
+            </tr>
+
+        }
+    </tbody>
+</table>
+<form method="post">
+    <p>Are you sure you want to apply for this job?</p>
+    <button class="Btn" type="submit">Apply</button>
+    <a asp-page="../Jobs/JobList">Cancel</a>
+</form>

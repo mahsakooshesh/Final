@@ -1,0 +1,35 @@
+﻿@page
+@model RP.Pages.Applicants.QuizModel
+@{
+    ViewData["Title"] = "Assessment Quiz";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<form class="Form" method="post">
+    <div asp-validation-summary="ModelOnly"></div>
+    <table>
+        <tbody>
+            <tr>
+                <th><label>What is 2+2 ?</label> </th>
+                <td><input asp-for="FormAssessment.Q1"></td>
+                <td><span asp-validation-for="FormAssessment.Q1"></span></td>
+            </tr>
+            <tr>
+                <th><label>What is the color of the sun?</label> </th>
+                <td><input asp-for="FormAssessment.Q2"></td>
+                <td><span asp-validation-for="FormAssessment.Q2"></span></td>
+            </tr>
+            <tr>
+                <th><label>What is the capital of Sweden </label> </th>
+                <td><input asp-for="FormAssessment.Q3"></td>
+                <td><span asp-validation-for="FormAssessment.Q3"></span></td>
+            </tr>
+        </tbody>
+    </table>
+    <button class="Btn" type="submit">Submit</button>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

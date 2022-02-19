@@ -1,0 +1,69 @@
+﻿@page
+@model RP.Pages.Applications.IndexModel
+@{
+    ViewData["Title"] = "Job Applications";
+}
+<h1 id="application">@ViewData["Title"]</h1>
+
+<form class="Form" id="formapplication" method="get">
+    <table>
+        <tbody>
+            <tr>
+                <th><label for="SearchTerm">Search</label></th>
+                <td><input type="search" name="SearchTerm" id="SearchTerm" value="@Model.SearchTerm"></td>
+            </tr>
+            <tr>
+                <th><label for="SortColumn">Sort by</label></th>
+                <td>
+                    <select asp-for="SortColumn" asp-items="Model.SortColumnList">
+                        <option></option>
+                    </select>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div id="searchButton"> <button class="Btn" type="submit">Search</button></div>
+</form>
+<div class="tableResponsive"> 
+    <table class="Table2">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(m => m.Applications[0].Job.Position)</th>
+            <th>@Html.DisplayNameFor(m => m.Applications[0].Job.Department)</th>
+            <th>@Html.DisplayNameFor(m => m.Applications[0].Job.JobLocation)</th>
+            <th>@Html.DisplayNameFor(m => m.Applications[0].Job.Salary)</th>
+            <th>@Html.DisplayNameFor(m => m.Applications[0].Job.ContractTerm)</th>
+            <th>@Html.DisplayNameFor(m => m.Applications[0].StatusMessage)</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Applications)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Job.Position)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Job.Department)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Job.JobLocation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Job.Salary)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Job.ContractTerm)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StatusMessage)
+            </td>
+            <td>
+                <a class="Btn" asp-page="Delete" asp-route-id="@item.ID">Withdraw</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+</div>

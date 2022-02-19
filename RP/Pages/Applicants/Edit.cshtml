@@ -1,0 +1,50 @@
+﻿@page
+@model RP.Pages.Applicants.EditModel
+@{
+    ViewData["Title"] = "Edit Profile";
+}
+
+<div id="editH1"><h1>@ViewData["Title"]</h1></div>
+<form class="Form" method="post">
+    <div asp-validation-summary="ModelOnly"></div>
+    <input type="hidden" asp-for="FormApplicant.UserID">
+    <table>
+        <tbody>
+            <tr>
+                <th><label>First Name</label> </th>
+                <td><input asp-for="FormApplicant.FName"></td>
+                <td><span asp-validation-for="FormApplicant.FName"></span></td>
+            </tr>
+            <tr>
+                <th><label>Last Name</label> </th>
+                <td><input asp-for="FormApplicant.LName"></td>
+                <td><span asp-validation-for="FormApplicant.LName"></span></td>
+            </tr>
+            <tr>
+                <th><label>Education</label> </th>
+                <td><input asp-for="FormApplicant.Education"></td>
+                <td><span asp-validation-for="FormApplicant.Education"></span></td>
+            </tr>
+            <tr>
+                <th><label>Experience Level</label> </th>
+                <td><input asp-for="FormApplicant.ExperienceLevel"></td>
+                <td><span asp-validation-for="FormApplicant.ExperienceLevel"></span></td>
+            </tr>
+            <tr>
+                <th><label>Location</label> </th>
+                <td><input asp-for="FormApplicant.Location"></td>
+                <td><span asp-validation-for="FormApplicant.Location"></span></td>
+            </tr>
+            <tr>
+                <th><label>Salary Expectation (SEK)</label> </th>
+                <td><input asp-for="FormApplicant.SalaryExpectation"></td>
+                <td><span asp-validation-for="FormApplicant.SalaryExpectation"></span></td>
+            </tr>
+        </tbody>
+    </table>
+    <button class="Btn" type="submit">Save Profile</button>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

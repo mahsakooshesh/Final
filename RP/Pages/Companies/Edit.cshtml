@@ -1,0 +1,31 @@
+﻿@page
+@model RP.Pages.Companies.EditModel
+@{
+    ViewData["Title"] = "Edit Company";
+}
+
+<h1>@ViewData["Title"]</h1>
+<form method="post">
+    <div asp-validation-summary="ModelOnly"></div>
+    <input type="hidden" asp-for="FormCompany.UserID">
+    <table class="Table3">
+        <tbody>
+            <tr>
+                <th><label>Name</label> </th>
+                <td><input asp-for="FormCompany.Name"></td>
+                <td><span asp-validation-for="FormCompany.Name"></span></td>
+            </tr>
+            <tr>
+                <th><label>Location</label> </th>
+                <td><input asp-for="FormCompany.Location"></td>
+                <td><span asp-validation-for="FormCompany.Location"></span></td>
+            </tr>
+           
+        </tbody>
+    </table>
+    <button class="Btn" type="submit">Save Company Profile</button>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,127 @@
+﻿@page
+@model RP.Pages.Applicants.IndexModel
+@{
+    ViewData["Title"] = "Applicant Page";
+    string fNameFilled = "";
+
+    //check if the logged in user has create profile, if not only the button create profile will be shown
+    if(Model.Applicant.Count()>0)
+    {
+        fNameFilled = Model.Applicant[0].FName;
+    }
+
+    else
+    {
+        fNameFilled = "";
+    }
+
+}
+
+<h1 id="applicantpage">@ViewData["Title"]</h1>
+
+<form class="Form" method="post" asp-page="Create">
+    @if (fNameFilled == "")
+    {
+        <button class="btnCreate" type="submit" name="btnCreate" runat="server" style="display:block">Create Profile</button>
+    }
+    else
+    {
+        <button class="btnCreate" type="submit" name="btnCreate" runat="server" style="display:none">Create Profile</button>
+        
+    }
+
+
+</form>
+
+
+<div class="tableApplicant">
+    <table class="applicantTable">
+
+        <tbody>
+            @foreach (var item in Model.Applicant)
+            {
+<tr class="applicantRow">
+    <td class="noborder">
+        <a class="Btn" asp-page="../Jobs/JobList">Available Jobs</a>
+    </td>
+</tr>
+                <tr id="applicantRow">
+                    <td class="noborder">
+                        <a class="Btn" asp-page="../Applications/Index">Ongoing Job Applications</a>
+                    </td>
+                </tr>
+                                <tr>
+                                    <td class="td1">
+                                        <label>First Name: </label>
+                                    </td>
+                                    <td class="td1">
+                                        @Html.DisplayFor(modelItem => item.FName)
+                                    </td>
+                                </tr>
+                                                <tr>
+                                                    <td class="td1">
+                                                        <label>Last Name: </label>
+                                                    </td>
+                                                    <td class="td1">
+                                                        @Html.DisplayFor(modelItem => item.LName)
+                                                    </td>
+                                                </tr>
+                                                                <tr>
+                                                                    <td class="td1">
+                                                                        <label>Education: </label>
+                                                                    </td>
+                                                                    <td class="td1">
+                                                                        @Html.DisplayFor(modelItem => item.Education)
+                                                                    </td>
+                                                                </tr>
+                                                                                <tr>
+                                                                                    <td class="td1">
+                                                                                        <label>Experience Level: </label>
+                                                                                    </td>
+                                                                                    <td class="td1">
+                                                                                        @Html.DisplayFor(modelItem => item.ExperienceLevel)
+                                                                                    </td>
+                                                                                </tr>
+                                                                                                <tr>
+                                                                                                    <td class="td1">
+                                                                                                        <label>Salary Expectation (SEK): </label>
+                                                                                                    </td>
+                                                                                                    <td class="td1">
+                                                                                                        @Html.DisplayFor(modelItem => item.SalaryExpectation)
+                                                                                                    </td>
+                                                                                                </tr>
+                                                                                                                <tr>
+                                                                                                                    <td class="td1">
+                                                                                                                        <label>Location: </label>
+                                                                                                                    </td>
+                                                                                                                    <td class="td1">
+                                                                                                                        @Html.DisplayFor(modelItem => item.Location)
+                                                                                                                    </td>
+                                                                                                                </tr>
+                                                                                                                                <tr>
+                                                                                                                                    <td class="td1">
+                                                                                                                                        <label>Assessment Score: </label>
+                                                                                                                                    </td>
+                                                                                                                                    <td class="td1">
+                                                                                                                                        @Html.DisplayFor(modelItem => item.AssessmentScore)
+                                                                                                                                    </td>
+                                                                                                                                </tr>
+                                                                                                                                                <tr>
+                                                                                                                                                    <td class="noborder">
+                                                                                                                                                        <a class="Btn" asp-page="./Edit" asp-route-id="@item.ID">Edit</a>
+                                                                                                                                                    </td>
+                                                                                                                                                </tr>
+                                                                                                                                                                <tr>
+                                                                                                                                                                    @if (Model.Applicant[0].TookQuiz == false)
+                                                                                                                                                                    {
+                                                                                                                                                    <td class="noborder">
+                                                                                                                                                        <a class="Btn" asp-page="Quiz" asp-route-id="@item.ID">Begin Assessment Quiz</a>
+                                                                                                                                                    </td>                }
+                                                                                                                                                                </tr>}
+        </tbody>
+    </table>
+
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
